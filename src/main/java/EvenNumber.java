@@ -13,17 +13,21 @@ public class EvenNumber extends Thread {
 
     @Override
     public void run() {
-        synchronized (list) {
+        try {
             getEvenNumbers();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        synchronized (list) {
             list.notify();
         }
     }
 
-    public void getEvenNumbers() {
+    public void getEvenNumbers() throws InterruptedException {
         for (int i = 2; i <= input; i += 2) {
             list.add(i);
         }
-        System.out.println(list);
+//        System.out.println(list);
     }
 }
 

@@ -12,13 +12,16 @@ public class OddNumber extends Thread {
 
     @Override
     public void run() {
-        getOddNumbers();
+        synchronized (list) {
+            getOddNumbers();
+            list.notify();
+        }
     }
 
     public void getOddNumbers() {
         for (int i = 1; i <= input; i += 2) {
             list.add(i);
         }
-        System.out.println(list);
+//        System.out.println(list);
     }
 }

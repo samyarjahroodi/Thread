@@ -8,11 +8,14 @@ public class Main {
         int input = scanner.nextInt();
         EvenNumber evenNumber = new EvenNumber(input, list);
         OddNumber oddNumber = new OddNumber(input, list);
+
+        evenNumber.start();
+        oddNumber.start();
+
         synchronized (list) {
-            evenNumber.start();
-            oddNumber.start();
             list.wait();
         }
+
         Collections.sort(list);
         System.out.println(list);
     }
