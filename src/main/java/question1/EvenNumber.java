@@ -1,3 +1,5 @@
+package question1;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,21 +15,20 @@ public class EvenNumber extends Thread {
 
     @Override
     public void run() {
-        try {
-            getEvenNumbers();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        getEvenNumbers();
         synchronized (list) {
-            list.notify();
+            try {
+                list.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void getEvenNumbers() throws InterruptedException {
+    public void getEvenNumbers() {
         for (int i = 2; i <= input; i += 2) {
             list.add(i);
         }
-//        System.out.println(list);
     }
 }
 

@@ -1,9 +1,11 @@
+package question1;
+
 import java.util.List;
 import java.util.TreeMap;
 
 public class OddNumber extends Thread {
-    int input;
     List<Integer> list;
+    int input;
 
     public OddNumber(int input, List<Integer> list) {
         this.input = input;
@@ -12,8 +14,13 @@ public class OddNumber extends Thread {
 
     @Override
     public void run() {
+//        try {
+//            getOddNumbers();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        getOddNumbers();
         synchronized (list) {
-            getOddNumbers();
             list.notify();
         }
     }
@@ -22,6 +29,5 @@ public class OddNumber extends Thread {
         for (int i = 1; i <= input; i += 2) {
             list.add(i);
         }
-//        System.out.println(list);
     }
 }
